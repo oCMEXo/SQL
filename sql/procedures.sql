@@ -1,5 +1,3 @@
--- Файл: sql/procedures.sql
--- Описание: Хранимые процедуры для аналитики видеоконтента
 
 CREATE OR REPLACE PROCEDURE get_popular_genres(min_views INTEGER)
 LANGUAGE SQL AS $ $
@@ -21,5 +19,4 @@ ORDER BY
   total_views DESC;
 $ $;
 
--- Пример вызова процедуры
 CALL get_popular_genres(1);

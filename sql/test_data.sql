@@ -1,5 +1,3 @@
--- Файл: sql/test_data.sql
--- Описание: Тестовые данные для базы данных видеоконтента
 
 INSERT INTO
   Genres (genre_name)
@@ -30,7 +28,7 @@ VALUES
     'Смешное видео'
     , 'Котик прыгает в коробку'
     , 120
-    , 's3://videos/cat.mp4'
+    , 's3://videos/cat.mp4' --заглушки
     , 1
     , 1
   )
@@ -38,7 +36,7 @@ VALUES
     'Урок SQL'
     , 'Основы баз данных'
     , 600
-    , 's3://videos/sql_lesson.mp4'
+    , 's3://videos/sql_lesson.mp4' --заглушки
     , 2
     , 3
   )
@@ -46,7 +44,7 @@ VALUES
     'Экшен-фильм'
     , 'Погоня за сокровищами'
     , 7200
-    , 's3://videos/action.mp4'
+    , 's3://videos/action.mp4' --заглушки
     , 3
     , 4
   );

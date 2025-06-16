@@ -1,7 +1,4 @@
--- Файл: queries.sql
--- Описание: Примеры запросов для работы с базой данных видеоконтента
 
--- 1. Топ-5 самых просматриваемых видео
 SELECT
   v.video_id
   , v.title
@@ -13,7 +10,6 @@ ORDER BY
 LIMIT
   5;
 
--- 2. Видео определённого жанра
 SELECT
   v.title
   , v.description
@@ -25,7 +21,6 @@ ON v.genre_id = g.genre_id
 WHERE
   g.genre_name = 'Комедия';
 
--- 3. Комментарии к видео
 SELECT
   c.comment_text
   , u.username
@@ -39,7 +34,6 @@ WHERE
 ORDER BY
   c.comment_date DESC;
 
--- 4. Статистика лайков/дизлайков
 SELECT
   v.title
   , SUM(
@@ -62,7 +56,6 @@ GROUP BY
   v.video_id
   , v.title;
 
--- 5. Видео в плейлисте пользователя
 SELECT
   p.title as playlist_title
   , v.title as video_title

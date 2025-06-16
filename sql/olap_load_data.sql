@@ -1,12 +1,8 @@
--- Файл: sql/olap_load_data.sql
--- Описание: Скрипт для загрузки агрегированных данных из OLTP в OLAP
 
--- Установка поиска по схеме (если базы на одном сервере)
 SET search_path
 TO
   olap_video_analytics;
 
--- Загрузка Dim_Time (из OLTP Views)
 INSERT INTO
   Dim_Time (date, month, year)
 SELECT DISTINCT
@@ -30,7 +26,6 @@ ON CONFLICT (date)
 DO
   NOTHING;
 
-  -- Загрузка Dim_Users (из OLTP Users с SCD Type 2)
   INSERT INTO
     Dim_Users (username, email, start_date, end_date, is_active)
   SELECT
@@ -52,7 +47,6 @@ DO
 DO
   NOTHING;
 
-  -- Загрузка Dim_Videos (из OLTP Videos)
   INSERT INTO
     Dim_Videos (title, genre_id)
   SELECT
@@ -67,7 +61,6 @@ DO
 DO
   NOTHING;
 
-  -- Загрузка Dim_Genres (из OLTP Genres)
   INSERT INTO
     Dim_Genres (genre_name)
   SELECT
@@ -81,7 +74,6 @@ DO
 DO
   NOTHING;
 
-  -- Загрузка Fact_Video_Views (агрегация просмотров)
   INSERT INTO
     Fact_Video_Views (time_id, user_id, video_id, total_views)
   SELECT
@@ -113,7 +105,6 @@ DO
   UPDATE
   SET total_views = EXCLUDED.total_views;
 
-  -- Загрузка Fact_User_Activity (агрегация активности)
   INSERT INTO
     Fact_User_Activity (time_id, user_id, total_likes, total_comments)
   SELECT
@@ -142,7 +133,6 @@ DO
   UPDATE
   SET total_likes = EXCLUDED.total_likes, total_comments = EXCLUDED.total_comments;
 
-  -- Загрузка Bridge_Playlist_Videos (агрегация)
   INSERT INTO
     Bridge_Playlist_Videos (playlist_id, video_id, video_count)
   SELECT

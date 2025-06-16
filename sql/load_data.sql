@@ -1,11 +1,7 @@
--- Файл: sql/load_data.sql
--- Описание: Скрипт для загрузки данных из .csv в OLTP базу данных (перезапускать)
 
--- Временное отключение ограничений внешних ключей для вставки
 SET CONSTRAINTS ALL
 DEFERRED;
 
--- Загрузка Genres во временную таблицу
 CREATE TEMP TABLE temp_genres (genre_name VARCHAR(50));
 COPY temp_genres
 FROM
@@ -22,7 +18,6 @@ DO
   NOTHING;
   DROP TABLE temp_genres;
 
-  -- Загрузка Users во временную таблицу
   CREATE TEMP TABLE temp_users (
     username VARCHAR(50)
     , email VARCHAR(100)
@@ -49,7 +44,6 @@ DO
     OR Users.registration_date != EXCLUDED.registration_date;
   DROP TABLE temp_users;
 
-  -- Загрузка Videos во временную таблицу
   CREATE TEMP TABLE temp_videos (
     title VARCHAR(200)
     , description TEXT
@@ -100,7 +94,6 @@ DO
     OR Videos.genre_id != EXCLUDED.genre_id;
   DROP TABLE temp_videos;
 
-  -- Загрузка Comments во временную таблицу
   CREATE TEMP TABLE temp_comments (
     video_title VARCHAR(200)
     , username VARCHAR(50)
@@ -132,7 +125,6 @@ DO
     Comments.comment_text != EXCLUDED.comment_text;
   DROP TABLE temp_comments;
 
-  -- Загрузка Likes во временную таблицу
   CREATE TEMP TABLE temp_likes (
     username VARCHAR(50)
     , video_title VARCHAR(200)
@@ -164,7 +156,6 @@ DO
     Likes.like_type != EXCLUDED.like_type;
   DROP TABLE temp_likes;
 
-  -- Загрузка Views во временную таблицу
   CREATE TEMP TABLE temp_views (
     username VARCHAR(50)
     , video_title VARCHAR(200)
@@ -191,7 +182,6 @@ DO
   NOTHING;
   DROP TABLE temp_views;
 
-  -- Загрузка Playlists во временную таблицу
   CREATE TEMP TABLE temp_playlists (
     title VARCHAR(200)
     , username VARCHAR(50)
@@ -220,7 +210,6 @@ DO
     OR Playlists.created_date != EXCLUDED.created_date;
   DROP TABLE temp_playlists;
 
-  -- Загрузка PlaylistVideos во временную таблицу
   CREATE TEMP TABLE temp_playlistvideos (
     playlist_title VARCHAR(200)
     , video_title VARCHAR(200)
@@ -250,11 +239,9 @@ DO
     PlaylistVideos.added_date != EXCLUDED.added_date;
   DROP TABLE temp_playlistvideos;
 
-  -- Включение обратно ограничений внешних ключей
   SET CONSTRAINTS ALL
   IMMEDIATE;
 
-  -- Проверка загруженных данных
   SELECT
     'Genres' AS table_name
     , COUNT(*)

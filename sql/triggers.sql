@@ -1,7 +1,3 @@
--- Файл: sql/triggers.sql
--- Описание: Триггеры для базы данных видеоконтента
-
--- Триггер для обновления view_count при добавлении просмотра
 CREATE OR REPLACE FUNCTION update_view_count()
 RETURNS TRIGGER AS $ $
 BEGIN

@@ -1,6 +1,3 @@
--- Файл: views.sql
--- Описание: Представления для аналитики видеоконтента
-
 CREATE VIEW video_stats AS
 SELECT
   v.video_id
