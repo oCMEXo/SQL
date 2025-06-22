@@ -1,4 +1,0 @@
-title,description,duration,file_path,upload_date,username,genre
-Смешное видео,Котик прыгает в коробку,120,s3://videos/cat.mp4,2025-06-05 12:00:00,user1,Комедия
-Урок SQL,Основы баз данных,600,s3://videos/sql_lesson.mp4,2025-06-06 14:00:00,user2,Образование
-Экшен-фильм,Погоня за сокровищами,7200,s3://videos/action.mp4,2025-06-07 16:00:00,user3,Экшен
